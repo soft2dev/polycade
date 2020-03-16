@@ -1,0 +1,3 @@
+export const GET_MACHINES = 'GET_MACHINES';
+export const GET_HEALTH = 'GET_HEALTH';
+export const PUT_MACHINE_NAME = 'PUT_MACHINE_NAME';
