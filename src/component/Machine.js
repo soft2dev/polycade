@@ -1,42 +1,39 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import ProgressBar from './ProgressBar'
 
-import Value from './Value';
-import * as actions from '../reducers';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-class Machine extends Component{
-
-    render(){
-        const mapToComponent = (data) => {
-            return data.map( (machine, i)  => {
-                return(<Value id={machine.id} name={machine.name} ip_address={machine.ip_address} health={machine.health} key={i}/>)
-            })
-        }
-        return(
-            <div>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Ip</th>
-                            <th>Health</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {mapToComponent(this.props.machines)}
-                    </tbody>
-                </table>                
-            </div>
-        )
-    }
-    
+const propTypes = {
+    id: PropTypes.string,
+    name: PropTypes.string,
+    ip: PropTypes.string,
+    health: PropTypes.number
 }
 
-const mapStateToComponent = ({ machines }) => ({
-    machines: machines.machines
-})
+const defaultProps = {
+    id: 'Unknown',
+    name: 'Unknown',
+    ip_address: 'Unknown',
+    health: -1
+}
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions,dispatch)
+class Machine extends Component{
+    
+    render(){
 
-export default connect( mapStateToComponent,mapDispatchToProps )(Machine)
+        return (
+            <tr>
+                <td><Link to={`/detail/${this.props.id}`}>{this.props.name}</Link></td>
+                <td>{this.props.ip_address}</td>
+                <td>
+                    <ProgressBar health= {this.props.health}/>
+                </td>
+            </tr>
+        )
+    }
+
+}
+Machine.propTypes = propTypes;
+Machine.defaultProps = defaultProps;
+
+export default Machine

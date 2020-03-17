@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import * as actions from '../reducers';
+import * as actions from '../reducers/Machines';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
 
 
 
-class Detail extends Component{
+class MachineDetail extends Component{
     constructor(props) {
         super(props);
-        console.log(props)
         this.state = {
             textInput: '',
             id: ''
@@ -32,10 +31,7 @@ class Detail extends Component{
         console.log(this.props)
         let selMachine = this.props.machines.find( machine => machine.id === this.props.match.params.id )
         if (!selMachine) return(<div></div>)
-        let color = 'bg-success';
-        if (0 <= selMachine.health && selMachine.health < 25) color = 'bg-danger';
-        if (25 <= selMachine.health && selMachine.health < 50) color = 'bg-warning';
-        if (50 <= selMachine.health && selMachine.health < 75) color = 'bg-info';
+        
         return(
             <div>
                 <div className="continer">
@@ -80,5 +76,4 @@ const mapStateToComponent = ({ machines }) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions,dispatch)
 
-
-export default connect( mapStateToComponent,mapDispatchToProps )(Detail)
+export default connect( mapStateToComponent,mapDispatchToProps )(MachineDetail)

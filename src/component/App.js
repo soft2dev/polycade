@@ -5,13 +5,13 @@ import {
 	Switch,
 	Link
 } from 'react-router-dom';
-import Machine from './Machine';
+import Machine from './Machines';
 import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as actions from '../reducers/Machines'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Detail from './Detail';
+import Detail from './MachineDetail';
 
 class App extends Component{
   
@@ -26,7 +26,6 @@ class App extends Component{
         <header className='App-header'>
           <img alt='logo' height='272' width='800' src='https://i.imgur.com/jcvsFKh.png' />
         </header>
-
         <nav className='App-nav'>
           <Link to='/'>Home</Link>
           <Link to='/machines'>Machines</Link>
